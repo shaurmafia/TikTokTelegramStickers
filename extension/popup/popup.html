@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>TikTok DM Sticker Saver</title>
+</head>
+<body>
+  <header>
+    <img src="../assets/icons/icon32.png" alt="" width="20" height="20" />
+    <h1>DM Sticker Saver</h1>
+    <span id="bridge" class="dot" title="native bridge status"></span>
+  </header>
+
+  <div id="notice" class="notice hidden"></div>
+
+  <main id="list" class="list"></main>
+
+  <div id="summary" class="summary hidden"></div>
+
+  <footer>
+    <button id="rescan" type="button">Rescan</button>
+    <button id="cancel" type="button" class="hidden" disabled>Cancel</button>
+    <button id="save" type="button" class="primary" disabled>Save selected</button>
+    <a id="options" href="options.html" target="_blank"
+       title="Open options">⚙</a>
+  </footer>
+
+  <script src="../lib/sniff.js"></script>
+  <script src="../lib/media_detect.js"></script>
+  <script src="../lib/msg_schema.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

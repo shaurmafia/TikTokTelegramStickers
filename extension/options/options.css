@@ -1,0 +1,108 @@
+:root {
+  --bg: #16161d;
+  --panel: #1e1e28;
+  --text: #e8e8f0;
+  --muted: #9a9aac;
+  --accent: #25f4ee;
+  --accent2: #fe2c55;
+  --border: #2c2c3a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+h1 {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2 { font-size: 14px; color: var(--accent); margin: 0 0 8px; }
+
+section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+code {
+  background: #101018;
+  padding: 2px 6px;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+button {
+  background: #26262f;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: default; }
+button.primary { border-color: var(--accent2); }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+.row span { width: 220px; color: var(--muted); }
+
+input[type="text"], input[type="number"], select, textarea {
+  background: #101018;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font: inherit;
+  flex: 1;
+}
+
+textarea {
+  width: 100%;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  resize: vertical;
+}
+
+details { margin-top: 10px; }
+details summary { color: var(--muted); cursor: pointer; }
+
+.hint { color: var(--muted); font-size: 12px; }
+
+.statusline { min-height: 1.4em; }
+.statusline.ok { color: #4ade80; }
+.statusline.err { color: #f87171; }
+
+.actions {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: none;
+}
+#saveMsg { color: var(--accent); }

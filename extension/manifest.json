@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "TikTok DM Sticker Saver (Phase 1)",
+  "version": "0.1.0",
+  "description": "Select sticker media visible in your TikTok Direct Messages and save the original bytes to a local folder via a native messaging bridge. Runs entirely on your machine.",
+  "author": "Shura / TikTok Telegram Sticker Toolkit contributors",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "action": {
+    "default_title": "TikTok DM Sticker Saver",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background/service_worker.js"
+  },
+  "permissions": ["storage", "nativeMessaging", "scripting"],
+  "host_permissions": [
+    "*://*.tiktok.com/*",
+    "*://*.tiktokcdn.com/*",
+    "*://*.tiktokcdn-us.com/*",
+    "*://*.tiktokcdn-eu.com/*",
+    "*://*.tiktokv.com/*",
+    "*://*.ibyteimg.com/*",
+    "*://*.byteimg.com/*",
+    "*://*.ttwstatic.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.tiktok.com/messages*"],
+      "js": ["content/bridge_main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.tiktok.com/messages*"],
+      "js": ["lib/media_detect.js", "content/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

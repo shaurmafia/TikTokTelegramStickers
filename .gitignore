@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
+
+# Local test artifacts (never commit saved media or logs)
+native_host/tests/out/
+tests/out/
+*.log
+
+# Packaging
+dist/
+build/

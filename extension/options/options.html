@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TikTok DM Sticker Saver — Options</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main>
+    <h1><img src="../assets/icons/icon32.png" alt="" width="24" height="24" />
+      TikTok DM Sticker Saver — Options</h1>
+
+    <section>
+      <h2>Native bridge</h2>
+      <p id="hostStatus" class="statusline">checking…</p>
+      <p><strong>Output folder:</strong> <code id="outputDir">—</code></p>
+      <button id="chooseFolder" type="button">Choose output folder…</button>
+      <p class="hint">The folder picker is shown by the native host; the choice
+        is stored in its config and used to confine all file writes.</p>
+    </section>
+
+    <section>
+      <h2>Bridge test</h2>
+      <p>Saves a built-in test image (a tiny valid PNG) through the whole
+        pipeline and verifies the written file byte-for-byte.</p>
+      <button id="testSave" type="button">Save test fixture…</button>
+      <p id="testResult" class="statusline"></p>
+    </section>
+
+    <section>
+      <h2>File naming</h2>
+      <label class="row">
+        <span>Mode</span>
+        <select id="namingMode">
+          <option value="suggested">Name from source URL</option>
+          <option value="prefix_ts">Prefix + timestamp</option>
+        </select>
+      </label>
+      <label class="row">
+        <span>Prefix (timestamp mode)</span>
+        <input id="namingPrefix" type="text" maxlength="40" />
+      </label>
+      <label class="row">
+        <span>Delay between downloads (ms)</span>
+        <input id="fetchGapMs" type="number" min="0" max="5000" step="50" />
+      </label>
+      <p class="hint">A small delay avoids the TikTok CDN 403s seen when
+        fetching aggressively in parallel.</p>
+    </section>
+
+    <section>
+      <h2>Detection patterns (advanced)</h2>
+      <p class="hint">URL substrings that identify TikTok DM media. One per
+        line. Defaults are best-effort and pending live verification — see
+        docs/KNOWN_LIMITATIONS.md.</p>
+      <textarea id="patterns" rows="8" spellcheck="false"></textarea>
+      <details>
+        <summary>Allowed media hosts</summary>
+        <textarea id="suffixes" rows="6" spellcheck="false"></textarea>
+      </details>
+    </section>
+
+    <div class="actions">
+      <button id="saveSettings" type="button" class="primary">Save settings</button>
+      <span id="saveMsg"></span>
+    </div>
+  </main>
+
+  <script src="../lib/msg_schema.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

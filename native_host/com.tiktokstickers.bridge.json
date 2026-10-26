@@ -1,0 +1,9 @@
+{
+  "name": "com.tiktokstickers.bridge",
+  "description": "TikTok Sticker Bridge: saves user-selected TikTok DM media to a local folder.",
+  "path": "C:\\Users\\shura\\Desktop\\ESH\\Development\\Projects\\TikTokTelegramStickers\\native_host\\run_host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://fincajkgmmefceogghnlblohbcdahpag/"
+  ]
+}
