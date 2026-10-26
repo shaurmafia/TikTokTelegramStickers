@@ -1,0 +1,7 @@
+# Runtime (bounded versions; regenerate locks with pip freeze for releases)
+PySide6>=6.6,<7
+Pillow>=10.3,<13
+
+# Development / tests
+pytest>=8,<10
+pyinstaller>=6.0 ; python_version >= "3.10"  # only needed for packaging

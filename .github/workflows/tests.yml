@@ -1,0 +1,39 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install "PySide6>=6.6,<7" "Pillow>=10.3,<13" "pytest>=8,<10"
+
+      - name: Verify FFmpeg availability (preinstalled on runners)
+        run: ffmpeg -version
+
+      - name: Generate synthetic fixtures
+        run: python tools/make_fixtures.py
+
+      - name: Run desktop test suite (offscreen)
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest desktop/tests -q --tb=short
+
+      - name: Run Phase 1 host test suite (still enforced)
+        run: python -m unittest discover -s native_host/tests -q

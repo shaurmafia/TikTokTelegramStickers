@@ -122,3 +122,42 @@ rights of the original sender.
 License: MIT (see [LICENSE](LICENSE); includes a third-party notice for the
 MIT-licensed Sticker-Grab project whose public heuristics informed the
 detection defaults). Not affiliated with TikTok or ByteDance.
+
+---
+
+# Phase 2 — Windows Desktop Converter (WIP)
+
+A PySide6 desktop app that imports original sticker media (drag-and-drop, or
+automatically from the Phase 1 extension's output folder) and converts it to
+Telegram-ready stickers with validation:
+
+- **Static** → PNG/lossless-WEBP → lossy WEBP ladder, 512 canvas, ≤ 512 KiB,
+  premultiplied-alpha scaling (no dark fringes)
+- **Animated/video** → WebM/VP9 two-pass, ≤ 256 KiB, ≤ 3 s, ≤ 30 fps, no
+  audio, VP9 alpha preserved (see docs/QUALITY_SPEC.md)
+- Per-file JSON reports (hashes, attempts, warnings, validator results);
+  originals copied untouched into `originals/`; outputs only marked
+  "Telegram-ready" after independent validation
+
+## Setup
+
+```bat
+python -m pip install -r requirements.txt
+:: FFmpeg: install any build to PATH, or extract a portable build to
+:: %LOCALAPPDATA%\TikTokStickersToolkit\ffmpeg\bin  (auto-discovered)
+
+python tools\make_fixtures.py     :: synthetic test media (deterministic)
+python -m pytest desktop\tests -q :: full Phase 2 test suite
+
+python -m desktop.app             :: launch the GUI
+python tools\build_windows.py     :: optional standalone exe (PyInstaller)
+```
+
+GUI: drag files/folders into the window → pick quality mode (`quality_first`,
+`balanced`, `size_first`) and the over-3s policy (`trim_first` / `speed_up`)
+→ Convert queue. Tick "Auto-ingest" to pick up new files the Phase 1
+extension saves into its configured output folder (debounced, deduplicated,
+extension names never trusted).
+
+CI: `.github/workflows/tests.yml` runs both phases' suites on
+`windows-latest` on every push.
